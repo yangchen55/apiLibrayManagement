@@ -9,3 +9,12 @@ import BookSchema from "./BookSchema.js";
 export const getAllBooks= (filter) => {
     return BookSchema.find(filter);
 }
+
+// delete by id that will be send from axios
+export const deleteManybooks = (_idsArg) => {
+    return BookSchema.deleteMany({_id: {$in: _idsArg}
+     
+    });
+  };
+
+

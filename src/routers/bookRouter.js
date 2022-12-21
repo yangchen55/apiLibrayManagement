@@ -1,7 +1,7 @@
 import express from "express";
 
 const router = express.Router();
-import {getAllBooks, insertBook} from "../models/books/BookModel.js"
+import {deleteManybooks, getAllBooks, insertBook} from "../models/books/BookModel.js"
 
 router.get("/", async(req, res, next)  => {
     try {
@@ -89,6 +89,29 @@ router.post("/", async(req, res, next)  => {
         
 //     }
 // })
+
+router.delete("/", async(req, res, next)  => {
+    try {
+        console.log(req.body, "delete boook");
+        const result = await deleteManybooks(req.body);
+        console.log(result, "from book router");
+        result?.deletedCount
+        ? res.json({
+            status: "success",
+            message: result.deletedCount + " item(s) deleted ",
+          })
+        : res.json({
+            status: "error",
+            message: "Nothing happened",
+          });
+
+    } catch (error) {
+        next(error);
+        
+    }
+
+})
+
 
 
 
