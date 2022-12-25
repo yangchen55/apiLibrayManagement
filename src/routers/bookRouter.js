@@ -5,7 +5,8 @@ import {deleteManybooks, getAllBooks, insertBook} from "../models/books/BookMode
 
 router.get("/", async(req, res, next)  => {
     try {
-        const books = await getAllBooks();
+        const {authorization} = req.headers;
+        const books = await getAllBooks({userId: authorization});
         res.json({
             status: "success",
             message : "listed suceessfully",
@@ -16,22 +17,24 @@ router.get("/", async(req, res, next)  => {
         
     } catch (error) {
         next(error) 
-        
+         
     }
 })
 
 router.post("/", async(req, res, next)  => {
 
     try{
-        const book = await insertBook(req.body);
-        if(book?._id){
+        const {authorization} = req.headers;
+        const book1 = await insertBook({...req.body, userId: authorization});
+        // res.redirect()
+        if(book1?._id){
             res.json({
                 status: "success",
                 message : "book added suceessfully",
-                book:{
-                    name: book.bookname,
-                    _id: book._id,
-                }
+                // book1:{
+                //     name: book.bookname,
+                //     _id: book._id,
+                // }
             });
            }
            res.json({

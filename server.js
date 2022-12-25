@@ -16,9 +16,10 @@ app.use(cors()) //allow cross orihin resources
 app.use(express.json()) // convert income data in the req.body
 import userRouter from './src/routers/userRouter.js'
 import bookRouter from './src/routers/bookRouter.js'
+import { isAuth } from './src/middleware/authmiddleware.js';
 
 app.use("/api/v1/user", userRouter)
-app.use("/api/v1/book", bookRouter)
+app.use("/api/v1/book", isAuth, bookRouter)
 
 app.use("*", (req, res)  =>{
     res.json({
