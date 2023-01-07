@@ -11,10 +11,10 @@ export const getAllBooks= (filter) => {
 }
 
 // delete by id that will be send from axios
-export const deleteManybooks = (_idsArg) => {
-    return BookSchema.deleteMany({_id: {$in: _idsArg}
+export const deleteManybooks = (id) => {
+    return BookSchema.findByIdAndDelete(id)
+}
      
-    });
-  };
+ 
 
 
