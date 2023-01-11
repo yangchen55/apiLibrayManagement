@@ -6,6 +6,7 @@ const transactionSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+
     studentName: {
       type: String,
     },
@@ -19,10 +20,24 @@ const transactionSchema = new mongoose.Schema(
     bookname: {
       type: String,
     },
+
     isbn: {
       type: String,
       unique: true,
       index: 1,
+    },
+
+    author: {
+      type: String,
+      required: true,
+    },
+
+    pdate: {
+      type: String,
+    },
+
+    abstract: {
+      type: String,
     },
   },
   {
